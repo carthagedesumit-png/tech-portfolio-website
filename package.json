@@ -1,9 +1,10 @@
 {
-  "name": "tech-portfolio-website",
+  "name": "carthage-systems-integrations",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "Professional Systems Engineering Portfolio",
   "main": "index.js",
+  "author": "Engr Carthage",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
