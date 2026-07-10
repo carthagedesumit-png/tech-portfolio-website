@@ -1,10 +1,9 @@
 {
-  "name": "carthage-systems-integrations",
+  "name": "carthage-technologies-corporate-site",
   "version": "1.0.0",
   "type": "module",
-  "description": "Professional Systems Engineering Portfolio",
+  "description": "Corporate website for Carthage Technologies and the Carthage Business Operating System.",
   "main": "index.js",
-  "author": "Engr Carthage",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,8 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/carthagedesumit-png/tech-portfolio-website.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "carthage-technologies",
+    "cbos",
+    "business-software",
+    "automation",
+    "renewable-energy",
+    "digital-infrastructure"
+  ],
+  "author": "Engr Carthage",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/carthagedesumit-png/tech-portfolio-website/issues"

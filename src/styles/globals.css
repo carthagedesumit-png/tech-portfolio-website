@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  background: #020617;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #020617;
+}
+
+#__next {
+  min-height: 100vh;
+}
+
+a, button, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
