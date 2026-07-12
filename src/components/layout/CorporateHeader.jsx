@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Products', href: '#products' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Engineering', href: '#engineering' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Documentation', href: '#documentation' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products/cbos' },
+  { label: 'Solutions', href: '/#solutions' },
+  { label: 'Engineering', href: '/#engineering' },
+  { label: 'Industries', href: '/#industries' },
+  { label: 'Documentation', href: '/#documentation' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export default function CorporateHeader() {
@@ -19,7 +19,7 @@ export default function CorporateHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <a href="#home" className="group flex items-center gap-3 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950" aria-label="Carthage Technologies home">
+        <a href="/" className="group flex items-center gap-3 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950" aria-label="Carthage Technologies home">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-300/30 bg-cyan-300/10 text-sm font-black text-cyan-200 shadow-[0_0_24px_rgba(34,211,238,0.16)]">CT</span>
           <span className="leading-tight">
             <span className="block text-sm font-semibold tracking-wide text-white">Carthage Technologies</span>
@@ -36,7 +36,7 @@ export default function CorporateHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#products" className="rounded-md border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+          <a href="/products/cbos" className="rounded-md border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
             Explore CBOS
           </a>
         </div>
@@ -61,7 +61,7 @@ export default function CorporateHeader() {
                 {item.label}
               </a>
             ))}
-            <a href="#products" onClick={closeMenu} className="mt-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-3 py-3 text-sm font-semibold text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+            <a href="/products/cbos" onClick={closeMenu} className="mt-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-3 py-3 text-sm font-semibold text-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
               Explore CBOS
             </a>
           </div>

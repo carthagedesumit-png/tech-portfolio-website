@@ -12,8 +12,8 @@ export default function ProductOverview() {
               CBOS is a modular operating platform for growing businesses that need sales, stock, customers, procurement, reporting, and administration to work from one coordinated foundation.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#contact" className="rounded-md bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">Request a Consultation</a>
-              <a href="#documentation" className="rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">View Documentation Plan</a>
+              <a href="/products/cbos#product-cta" className="rounded-md bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">Request a CBOS Demo</a>
+              <a href="/products/cbos#capabilities" className="rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">Explore CBOS Capabilities</a>
             </div>
           </div>
 
