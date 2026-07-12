@@ -2,7 +2,7 @@ const footerGroups = [
   ['Company', ['About', 'Contact', 'Roadmap']],
   ['Products', ['CBOS', 'Modules', 'Editions planned']],
   ['Engineering', [['Solar systems', '/engineering/solar'], ['Networking', '/engineering/networking'], ['Security', '/engineering/security'], ['Automation', '/engineering/automation']]],
-  ['Resources', ['Documentation planned', 'GitHub', 'Support']],
+  ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], 'GitHub']],
   ['Legal', ['Privacy placeholder', 'Terms placeholder']],
 ];
 

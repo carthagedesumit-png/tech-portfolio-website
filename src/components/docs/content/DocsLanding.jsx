@@ -1,0 +1,7 @@
+import DocsBreadcrumbs from '../shared/DocsBreadcrumbs';
+import DocsSearchPlaceholder from '../shared/DocsSearchPlaceholder';
+import { docsCategories, docsList } from './docsData';
+
+export default function DocsLanding() {
+  return <main className="min-w-0"><DocsBreadcrumbs /><section className="border-b border-slate-800 pb-10"><p className="text-xs font-black uppercase tracking-[0.24em] text-cyan-300">Public knowledge hub</p><h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-6xl">Documentation Center</h1><p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">Practical guidance for CBOS, deployment, operations, integrations, release information, troubleshooting, and Carthage Engineering.</p></section><section aria-labelledby="categories-heading" className="py-12"><h2 id="categories-heading" className="text-2xl font-black text-white">Browse by category</h2><div className="mt-6 grid gap-4 sm:grid-cols-2">{docsCategories.map((category) => <article key={category.name} className="rounded-lg border border-slate-800 bg-slate-900/50 p-5"><h3 className="text-lg font-black text-white">{category.name}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{category.description}</p><p className="mt-4 text-xs font-bold uppercase tracking-[0.15em] text-cyan-300">{category.slugs.length} {category.slugs.length === 1 ? 'guide' : 'guides'}</p></article>)}</div></section><DocsSearchPlaceholder documents={docsList} /></main>;
+}

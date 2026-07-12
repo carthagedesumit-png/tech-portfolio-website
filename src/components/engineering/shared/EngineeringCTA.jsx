@@ -8,6 +8,7 @@ export default function EngineeringCTA() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <a href="mailto:engineering@carthage.infra?subject=Engineering%20consultation" className="inline-flex items-center justify-center rounded-md bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">Request Consultation</a>
           <a href="mailto:engineering@carthage.infra?subject=Engineering%20requirements" className="inline-flex items-center justify-center rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200">Discuss Your Requirements</a>
+          <a href="/docs/engineering" className="inline-flex items-center justify-center rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200">Engineering Guides</a>
         </div>
       </div>
     </section>

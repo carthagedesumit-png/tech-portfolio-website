@@ -20,6 +20,18 @@ This repository contains the corporate website foundation for Carthage Technolog
 - `/engineering/automation` - Industrial, IoT, building, and business automation
 - `/engineering/electrical` - Electrical installations, distribution, and backup power
 - `/engineering/consulting` - Site surveys, planning, design, and implementation support
+- `/docs` - Public Documentation Center and client-side guide filter
+- `/docs/cbos` - CBOS overview and product maturity
+- `/docs/getting-started` - Customer-friendly setup sequence
+- `/docs/installation` - Windows deployment foundation
+- `/docs/administration` - Administrative guidance
+- `/docs/user-guide` - Operational workflow guidance
+- `/docs/backup-recovery` - Backup, restore, and retention principles
+- `/docs/licensing` - Licensing and activation concepts
+- `/docs/api` - Public API overview
+- `/docs/releases` - Release status and versioning foundation
+- `/docs/troubleshooting` - Safe troubleshooting guidance
+- `/docs/engineering` - Engineering guides and tool availability
 - `/solutions` - Industry solutions landing page
 - `/solutions/retail` - Retail solution journey
 - `/solutions/wholesale-distribution` - Wholesale and distribution solution journey
@@ -37,6 +49,9 @@ This repository contains the corporate website foundation for Carthage Technolog
 - `src/components/engineering/` - Engineering data, landing experience, division page layouts, and shared engineering components
 - `src/components/engineering/shared/` - Hero, CTA, service, capability, tool, calculator, and project showcase cards
 - `src/components/engineering/pages/` - Reusable division and route presentation layouts
+- `src/components/docs/layout/` - Documentation shell and responsive sidebar navigation
+- `src/components/docs/content/` - Public-safe article data, landing page, and article renderer
+- `src/components/docs/shared/` - Search, cards, callouts, status, breadcrumbs, contents, pagination, and CTA components
 - `src/components/SolarCalculator.jsx` - Preserved standalone solar calculator
 
 ## Setup
@@ -68,6 +83,7 @@ Current milestone work is expected on `feature/carthage-corporate-website`. Pres
 - Milestone 2: CBOS product page V1 at `/products/cbos` - complete
 - Milestone 3: Industry solutions V1 with sector-specific customer journeys - complete
 - Milestone 4: Engineering Division V1 with six dedicated service areas - complete
+- Milestone 5: Documentation Center V1 public knowledge hub - complete
 - Future: Support, legal, and customer documentation pages
 
 ## Current vs Planned Capability Policy
@@ -97,3 +113,9 @@ Planned and clearly marked `Coming Soon`:
 - Voltage Drop Calculator
 
 The previous engineering client hub remains preserved at `src/components/engineering/EngineeringWorkspace.jsx`; it is not used to make unverified project or availability claims in the corporate Engineering Division.
+
+## Documentation Content Policy
+
+Public documentation distinguishes implemented capability, product foundations, planned work, and release-time requirements. It must not publish secrets, credentials, signing material, private filesystem paths, invented customers, certifications, uptime guarantees, release dates, screenshots, or unsupported product behavior.
+
+Documentation search in V1 filters the guide cards by title, category, and description in the browser. Full article-content search and a documentation CMS are planned, not implemented.
