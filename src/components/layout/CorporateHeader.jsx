@@ -4,7 +4,7 @@ const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products/cbos' },
   { label: 'Solutions', href: '/solutions' },
-  { label: 'Engineering', href: '/#engineering' },
+  { label: 'Engineering', href: '/engineering' },
   { label: 'Industries', href: '/solutions' },
   { label: 'Documentation', href: '/#documentation' },
   { label: 'About', href: '/#about' },

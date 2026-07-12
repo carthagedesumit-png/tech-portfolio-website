@@ -13,6 +13,13 @@ This repository contains the corporate website foundation for Carthage Technolog
 
 - `/` - Corporate homepage for Carthage Technologies
 - `/products/cbos` - CBOS flagship product page
+- `/engineering` - Engineering Division landing page
+- `/engineering/solar` - Solar, hybrid, storage, and energy engineering
+- `/engineering/networking` - Enterprise networking and structured infrastructure
+- `/engineering/security` - CCTV, access control, and security infrastructure
+- `/engineering/automation` - Industrial, IoT, building, and business automation
+- `/engineering/electrical` - Electrical installations, distribution, and backup power
+- `/engineering/consulting` - Site surveys, planning, design, and implementation support
 - `/solutions` - Industry solutions landing page
 - `/solutions/retail` - Retail solution journey
 - `/solutions/wholesale-distribution` - Wholesale and distribution solution journey
@@ -27,7 +34,9 @@ This repository contains the corporate website foundation for Carthage Technolog
 - `src/components/home/` - Corporate homepage sections
 - `src/components/products/cbos/` - Dedicated CBOS product page sections
 - `src/components/solutions/` - Solutions landing page, industry data, shared cards, status badges, CTAs, and page templates
-- `src/components/engineering/` - Preserved engineering workspace for future Engineering pages
+- `src/components/engineering/` - Engineering data, landing experience, division page layouts, and shared engineering components
+- `src/components/engineering/shared/` - Hero, CTA, service, capability, tool, calculator, and project showcase cards
+- `src/components/engineering/pages/` - Reusable division and route presentation layouts
 - `src/components/SolarCalculator.jsx` - Preserved standalone solar calculator
 
 ## Setup
@@ -57,8 +66,8 @@ Current milestone work is expected on `feature/carthage-corporate-website`. Pres
 
 - Milestone 1: Corporate homepage foundation and component architecture - complete
 - Milestone 2: CBOS product page V1 at `/products/cbos` - complete
-- Milestone 3: Industry solutions V1 with sector-specific customer journeys - in progress for this change set
-- Future: Dedicated Engineering division page using the preserved engineering workspace components
+- Milestone 3: Industry solutions V1 with sector-specific customer journeys - complete
+- Milestone 4: Engineering Division V1 with six dedicated service areas - complete
 - Future: Support, legal, and customer documentation pages
 
 ## Current vs Planned Capability Policy
@@ -71,6 +80,20 @@ Industry pages must distinguish the current CBOS foundation from planned special
 - `npm audit` currently reports a known moderate advisory in Next's nested PostCSS dependency; the available audit fix requires `npm audit fix --force` and a breaking dependency path, so it is intentionally not applied in these milestones.
 - The current `next lint` script may be invalid under Next.js 16 and should not be treated as a passing lint setup until a proper ESLint configuration is added.
 
-## Preserved Engineering Assets
+## Engineering Tools
 
-The previous engineering client hub has been preserved as `src/components/engineering/EngineeringWorkspace.jsx`. The standalone solar calculator remains available at `src/components/SolarCalculator.jsx`.
+The existing standalone Solar Calculator remains unchanged at `src/components/SolarCalculator.jsx` and is integrated into `/engineering/solar` as an indicative planning tool.
+
+Available:
+
+- Solar Calculator
+
+Planned and clearly marked `Coming Soon`:
+
+- Cable Calculator
+- Battery Sizing
+- Load Estimator
+- Network Planner
+- Voltage Drop Calculator
+
+The previous engineering client hub remains preserved at `src/components/engineering/EngineeringWorkspace.jsx`; it is not used to make unverified project or availability claims in the corporate Engineering Division.

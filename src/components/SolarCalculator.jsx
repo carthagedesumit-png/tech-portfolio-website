@@ -27,24 +27,26 @@ export default function SolarCalculator() {
                 {/* INPUT CONTROLS */}
                 <div className="space-y-6">
                     <div>
-                        <label className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
+                        <label htmlFor="solar-daily-load" className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
                             Total Daily Load: <span className="text-yellow-500 font-mono text-sm">{dailyLoad} Wh</span>
                         </label>
                         <input
+                            id="solar-daily-load"
                             type="range" min="500" max="15000" step="100"
                             value={dailyLoad} onChange={(e) => setDailyLoad(Number(e.target.value))}
-                            className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-yellow-500"
+                            className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-yellow-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-900"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
+                        <label htmlFor="solar-backup-hours" className="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">
                             Target Autonomy Window: <span className="text-yellow-500 font-mono text-sm">{backupHours} Hours</span>
                         </label>
                         <input
+                            id="solar-backup-hours"
                             type="range" min="2" max="48" step="2"
                             value={backupHours} onChange={(e) => setBackupHours(Number(e.target.value))}
-                            className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-yellow-500"
+                            className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-yellow-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-900"
                         />
                     </div>
 
@@ -55,8 +57,9 @@ export default function SolarCalculator() {
                         <div className="grid grid-cols-3 gap-2">
                             {[12, 24, 48].map((v) => (
                                 <button
+                                    type="button"
                                     key={v} onClick={() => setSystemVoltage(v)}
-                                    className={`py-2 px-3 rounded text-xs font-mono border transition-all ${
+                                    className={`py-2 px-3 rounded text-xs font-mono border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 ${
                                         systemVoltage === v
                                             ? 'bg-yellow-500/10 border-yellow-500 text-yellow-500'
                                             : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
