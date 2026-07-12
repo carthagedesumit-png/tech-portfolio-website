@@ -3,9 +3,9 @@ import { useState } from 'react';
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products/cbos' },
-  { label: 'Solutions', href: '/#solutions' },
+  { label: 'Solutions', href: '/solutions' },
   { label: 'Engineering', href: '/#engineering' },
-  { label: 'Industries', href: '/#industries' },
+  { label: 'Industries', href: '/solutions' },
   { label: 'Documentation', href: '/#documentation' },
   { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
@@ -29,7 +29,7 @@ export default function CorporateHeader() {
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-900 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+            <a key={item.label} href={item.href} className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition hover:bg-slate-900 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
               {item.label}
             </a>
           ))}
@@ -57,7 +57,7 @@ export default function CorporateHeader() {
         <nav id="mobile-navigation" className="border-t border-slate-800 bg-slate-950 px-4 pb-5 pt-2 lg:hidden" aria-label="Mobile navigation">
           <div className="mx-auto grid max-w-7xl gap-1">
             {navItems.map((item) => (
-              <a key={item.href} href={item.href} onClick={closeMenu} className="rounded-md px-3 py-3 text-sm font-medium text-slate-300 transition hover:bg-slate-900 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+              <a key={item.label} href={item.href} onClick={closeMenu} className="rounded-md px-3 py-3 text-sm font-medium text-slate-300 transition hover:bg-slate-900 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
                 {item.label}
               </a>
             ))}
