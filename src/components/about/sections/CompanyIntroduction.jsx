@@ -1,0 +1,6 @@
+import AboutSectionHeading from '../shared/AboutSectionHeading';
+import { companyPillars } from '../aboutData';
+
+export default function CompanyIntroduction() {
+  return <section className="bg-slate-950 py-20"><div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8"><div><AboutSectionHeading eyebrow="Who we are" title="Technology with a reason to exist." description="Carthage Technologies is a technology and software engineering company committed to helping organizations work more effectively through dependable digital solutions." /><p className="mt-6 text-base leading-8 text-slate-400">We combine software engineering, product design, business strategy, and industry knowledge to build technology around meaningful problems—not adopt technology without purpose.</p></div><div className="space-y-3">{companyPillars.map((pillar, index) => <article key={pillar.title} className="grid gap-3 rounded-lg border border-slate-800 bg-slate-900/50 p-5 sm:grid-cols-[2.5rem_1fr]"><span aria-hidden="true" className="font-mono text-sm font-bold text-cyan-300">0{index + 1}</span><div><h3 className="font-black text-white">{pillar.title}</h3><p className="mt-2 text-sm leading-6 text-slate-400">{pillar.copy}</p></div></article>)}</div></div></section>;
+}
