@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Industries', href: '/solutions' },
   { label: 'Documentation', href: '/docs' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function CorporateHeader() {

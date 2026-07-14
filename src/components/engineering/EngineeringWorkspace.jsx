@@ -149,7 +149,7 @@ export default function EngineeringWorkspace() {
     };
 
     const handleCopyToClipboard = () => {
-        navigator.clipboard.writeText('engineering@carthage.infra');
+        navigator.clipboard.writeText('carthagesysystems01@gmail.com');
         setCopiedFeedback(true);
         setTimeout(() => setCopiedFeedback(false), 2000);
     };

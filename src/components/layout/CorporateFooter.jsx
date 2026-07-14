@@ -1,5 +1,5 @@
 const footerGroups = [
-  ['Company', [['About', '/about'], ['Contact', '/#contact'], 'Roadmap']],
+  ['Company', [['About', '/about'], ['Contact', '/contact'], 'Roadmap']],
   ['Products', ['CBOS', 'Modules', 'Editions planned']],
   ['Engineering', [['Solar systems', '/engineering/solar'], ['Networking', '/engineering/networking'], ['Security', '/engineering/security'], ['Automation', '/engineering/automation']]],
   ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], 'GitHub']],
