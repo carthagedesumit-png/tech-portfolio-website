@@ -14,10 +14,52 @@ body {
   background: #020617;
 }
 
+.visual-hero-home {
+  background-image:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 34%),
+    linear-gradient(135deg, #020617 0%, #0f172a 52%, #111827 100%);
+}
+
+.visual-hero-about {
+  background-image:
+    radial-gradient(circle at 78% 22%, rgba(34, 211, 238, 0.18), transparent 28%),
+    linear-gradient(135deg, #020617 0%, #0f172a 58%, #111827 100%);
+}
+
+.visual-hero-solutions {
+  background-image:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 34%),
+    linear-gradient(135deg, #020617 0%, #0f172a 56%, #111827 100%);
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 #__next {
   min-height: 100vh;
 }
 
-a, button, input, textarea, select {
+a,
+button,
+input,
+textarea,
+select {
   -webkit-tap-highlight-color: transparent;
 }

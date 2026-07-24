@@ -1,14 +1,16 @@
 import SolutionCard from './shared/SolutionCard';
 import IndustryCTA from './shared/IndustryCTA';
 import { industries } from './industries/industryData';
+import VisualFrame from '@/components/visuals/VisualFrame';
+import TechnologyDiagram from '@/components/visuals/TechnologyDiagram';
 
 export default function SolutionsLanding() {
   return (
     <>
       <section className="relative isolate overflow-hidden border-b border-slate-900">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_34%),linear-gradient(135deg,#020617_0%,#0f172a_56%,#111827_100%)]" />
-        <div className="mx-auto min-h-[calc(100vh-74px)] max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="flex min-h-[calc(100vh-220px)] max-w-4xl flex-col justify-center">
+        <div className="visual-hero-solutions absolute inset-0 -z-10" />
+        <div className="mx-auto grid min-h-[calc(100vh-74px)] max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
+          <div className="flex flex-col justify-center">
             <p className="mb-5 inline-flex w-fit rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-100">Industry solutions</p>
             <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl">CBOS journeys for real business sectors.</h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">Carthage Technologies organizes business software, infrastructure thinking, and deployment readiness around the way customers actually operate. CBOS is the current flagship platform, with specialist industry editions planned where deeper workflows are required.</p>
@@ -17,6 +19,7 @@ export default function SolutionsLanding() {
               <a href="#industry-cards" className="inline-flex items-center justify-center rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200">View Industries</a>
             </div>
           </div>
+          <VisualFrame conceptual caption="Operational flows across industry environments"><TechnologyDiagram variant="product" label="Conceptual industry operations network connecting point of sale, stock, reporting, procurement, and stores" /></VisualFrame>
         </div>
       </section>
 
