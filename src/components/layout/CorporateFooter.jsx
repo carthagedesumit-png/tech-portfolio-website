@@ -1,5 +1,5 @@
 const footerGroups = [
-  ['Company', [['About', '/about'], ['Contact', '/contact'], ['Roadmap', '/docs/releases']]],
+  ['Company', [['About', '/about'], ['Portfolio', '/portfolio'], ['Contact', '/contact'], ['Roadmap', '/docs/releases']]],
   ['Products', [['CBOS', '/products/cbos'], ['Modules', '/products/cbos#capabilities'], ['Editions', '/pricing']]],
   ['Engineering', [['Solar systems', '/engineering/solar'], ['Networking', '/engineering/networking'], ['Security', '/engineering/security'], ['Automation', '/engineering/automation']]],
   ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], ['GitHub', 'https://github.com/carthagedesumit-png/tech-portfolio-website']]],

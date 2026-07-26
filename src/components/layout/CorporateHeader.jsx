@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Products', href: '/products/cbos' },
   { label: 'Solutions', href: '/solutions' },
   { label: 'Engineering', href: '/engineering' },
+  { label: 'Portfolio', href: '/portfolio' },
   { label: 'Industries', href: '/solutions' },
   { label: 'Documentation', href: '/docs' },
   { label: 'About', href: '/about' },

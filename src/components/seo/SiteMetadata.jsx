@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { docs } from '@/components/docs/content/docsData';
 import { engineeringMap } from '@/components/engineering/engineeringData';
+import { projectMap } from '@/components/portfolio/portfolioData';
 import { industryMap } from '@/components/solutions/industries/industryData';
 
 export const SITE_URL = (
@@ -23,6 +24,11 @@ const staticMetadata = {
     title: 'Contact Carthage Technologies | Start a Conversation',
     description:
       'Contact Carthage Technologies about CBOS, engineering services, implementation planning, partnerships, or general enquiries.',
+  },
+  '/portfolio': {
+    title: 'Engineering Project Portfolio | Carthage Technologies',
+    description:
+      'Explore Carthage Technologies engineering project case studies across CBT laboratories, security, networks, energy, systems, and software deployment.',
   },
   '/products/cbos': {
     title: 'CBOS | Carthage Business Operating System',
@@ -97,6 +103,17 @@ function getMetadata(pathname) {
       return {
         title: `${division.name} | Carthage Engineering`,
         description: division.summary,
+      };
+    }
+  }
+
+  if (pathname.startsWith('/portfolio/')) {
+    const project = projectMap[pathname.slice('/portfolio/'.length)];
+    if (project) {
+      return {
+        title: `${project.title} | Carthage Technologies Portfolio`,
+        description: project.summary,
+        type: 'article',
       };
     }
   }

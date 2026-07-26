@@ -23,6 +23,7 @@ if (process.env.PLAYWRIGHT_CHROME_PATH && !systemChromePath) {
 
 export default defineConfig({
   testDir: './tests/e2e',
+  outputDir: process.env.PLAYWRIGHT_OUTPUT_DIR || './test-results',
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
