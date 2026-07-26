@@ -2,9 +2,12 @@
 /.pnp
 .pnp.js
 /coverage
+/.eslintcache
 /.next/
 /out/
 /build
+/playwright-report/
+/test-results/
 .DS_Store
 *.pem
 npm-debug.log*

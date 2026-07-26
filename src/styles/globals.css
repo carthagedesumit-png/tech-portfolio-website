@@ -1,4 +1,12 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "../pages";
+@source "../components";
+
+/* Slate 500/600 text falls below WCAG AA on the site's slate-950 surfaces. */
+.text-slate-500,
+.text-slate-600 {
+  color: var(--color-slate-400);
+}
 
 :root {
   color-scheme: dark;

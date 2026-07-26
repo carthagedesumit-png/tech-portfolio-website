@@ -73,6 +73,35 @@ npm run build
 npm run start
 ```
 
+## Automated Quality Gates
+
+Run the complete local launch-readiness suite:
+
+```bash
+npm run verify
+```
+
+The individual gates are also available:
+
+```bash
+npm run lint
+npm run build
+npm run test:e2e
+```
+
+ESLint uses the Next.js Core Web Vitals rules. Playwright checks key public
+routes, primary navigation, and WCAG A/AA accessibility with Axe. Browser tests
+use the production build, so run `npm run build` before `npm run test:e2e` when
+running that gate by itself. The test runner owns its temporary production
+server and closes only that server when the suite finishes.
+
+On Windows, browser tests automatically use an installed Google Chrome when it
+is available, avoiding a dependency on Playwright's browser download CDN. Set
+`PLAYWRIGHT_CHROME_PATH` to an explicit Chrome executable when auto-detection is
+not suitable. Set `PLAYWRIGHT_USE_SYSTEM_CHROME=false` to require Playwright's
+bundled Chromium instead. To test an already-running site, set
+`PLAYWRIGHT_BASE_URL`.
+
 ## Branch Workflow
 
 Current milestone work is expected on `feature/carthage-corporate-website`. Preserve existing corporate homepage architecture, the CBOS product page, and reusable engineering assets unless a milestone explicitly calls for changes.
@@ -92,9 +121,11 @@ Industry pages must distinguish the current CBOS foundation from planned special
 
 ## Tooling Notes
 
-- `npm run build` is the primary production verification command.
+- `npm run verify` runs lint, the production build, and browser-based
+  accessibility and smoke tests.
 - `npm audit` currently reports a known moderate advisory in Next's nested PostCSS dependency; the available audit fix requires `npm audit fix --force` and a breaking dependency path, so it is intentionally not applied in these milestones.
-- The current `next lint` script may be invalid under Next.js 16 and should not be treated as a passing lint setup until a proper ESLint configuration is added.
+- Tailwind scans only `src/pages` and `src/components`, keeping generated files
+  and browser-test artifacts outside its source boundary.
 
 ## Engineering Tools
 
