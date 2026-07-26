@@ -286,6 +286,13 @@ test('robots and sitemap expose the intended public crawl surface', async ({ req
   }
 });
 
+test('production responses do not disclose the framework header', async ({ request }) => {
+  const response = await request.get('/');
+
+  expect(response.ok()).toBe(true);
+  expect(response.headers()['x-powered-by']).toBeUndefined();
+});
+
 test('the 404 page provides clear recovery actions and is not indexed', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist');
   expect(response?.status()).toBe(404);

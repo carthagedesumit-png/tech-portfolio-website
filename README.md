@@ -57,8 +57,13 @@ This repository contains the corporate website foundation for Carthage Technolog
 ## Setup
 
 ```bash
-npm install
+npm ci
 ```
+
+The dependency baseline is verified with Node.js 24.16.x and npm 11.13.x.
+`npm ci` installs exactly from `package-lock.json`; use it for clean local and
+CI installations. Do not use `--force` or `--legacy-peer-deps` to bypass
+dependency compatibility.
 
 ## Development
 
@@ -89,6 +94,20 @@ npm run build
 npm run test:e2e
 ```
 
+After changing dependencies, refresh the lockfile with the repository's npm
+version, then run:
+
+```bash
+npm ci
+npm run verify
+npm audit
+npm audit --omit=dev
+```
+
+Review production and development-only audit results separately. Do not apply
+`npm audit fix --force`; investigate major-version remediations and peer
+compatibility before updating.
+
 ESLint uses the Next.js Core Web Vitals rules. Playwright checks key public
 routes, primary navigation, and WCAG A/AA accessibility with Axe. Browser tests
 use the production build, so run `npm run build` before `npm run test:e2e` when
@@ -104,7 +123,15 @@ bundled Chromium instead. To test an already-running site, set
 
 ## Branch Workflow
 
-Current milestone work is expected on `feature/carthage-corporate-website`. Preserve existing corporate homepage architecture, the CBOS product page, and reusable engineering assets unless a milestone explicitly calls for changes.
+Preserve the corporate site architecture, existing routes, and reusable
+engineering assets unless a milestone explicitly calls for changes.
+
+## Security Reporting
+
+Do not open a public issue containing credentials, private deployment details,
+or an undisclosed vulnerability. Report security concerns privately through
+the repository owner's GitHub security advisory contact. General,
+non-sensitive dependency maintenance can use the repository issue tracker.
 
 ## Website Milestone Status
 
@@ -123,7 +150,9 @@ Industry pages must distinguish the current CBOS foundation from planned special
 
 - `npm run verify` runs lint, the production build, and browser-based
   accessibility and smoke tests.
-- `npm audit` currently reports a known moderate advisory in Next's nested PostCSS dependency; the available audit fix requires `npm audit fix --force` and a breaking dependency path, so it is intentionally not applied in these milestones.
+- Audit findings must be reviewed in both full and production-only scopes.
+  Remaining advisories are documented in milestone validation rather than
+  suppressed with dependency overrides or forced framework changes.
 - Tailwind scans only `src/pages` and `src/components`, keeping generated files
   and browser-test artifacts outside its source boundary.
 
@@ -150,3 +179,36 @@ The previous engineering client hub remains preserved at `src/components/enginee
 Public documentation distinguishes implemented capability, product foundations, planned work, and release-time requirements. It must not publish secrets, credentials, signing material, private filesystem paths, invented customers, certifications, uptime guarantees, release dates, screenshots, or unsupported product behavior.
 
 Documentation search in V1 filters the guide cards by title, category, and description in the browser. Full article-content search and a documentation CMS are planned, not implemented.
+
+## Known Dependency Security Exceptions
+
+The current stable dependency baseline uses `next@16.2.12`. Its production
+dependency tree currently contains the following high-severity advisories:
+
+- `next@16.2.12 -> sharp@0.34.5`
+  - Advisory: `GHSA-f88m-g3jw-g9cj`
+  - Related CVEs: `CVE-2026-33327`, `CVE-2026-33328`,
+    `CVE-2026-35590`, and `CVE-2026-35591`
+  - Exploitation requires Sharp to decode attacker-controlled GIF, TIFF, or
+    VIPS image input. This website currently processes only repository-owned
+    image assets and provides no public image-upload, remote-image proxy, or
+    attacker-controlled image-processing endpoint.
+
+- `next@16.2.12 -> postcss@8.4.31`
+  - Advisories:
+    - `GHSA-qx2v-qp2m-jg93`
+    - `GHSA-6g55-p6wh-862q`
+    - `GHSA-r28c-9q8g-f849`
+  - The website does not accept or compile attacker-controlled CSS or source
+    maps at runtime.
+
+`npm audit fix --force` is intentionally prohibited because npm currently
+suggests downgrading Next.js to `9.3.3`, which is incompatible with this
+Next.js 16 and React 19 application. Dependency overrides and preview framework
+releases are also not accepted as production remediations without upstream
+compatibility support.
+
+These findings are accepted temporarily as documented residual risk. Run
+`npm audit` and `npm audit --omit=dev` after each stable Next.js dependency
+refresh and remove this exception when stable Next.js adopts patched Sharp and
+PostCSS versions.

@@ -4,6 +4,11 @@
   "type": "module",
   "description": "Corporate website for Carthage Technologies and the Carthage Business Operating System.",
   "main": "index.js",
+  "engines": {
+    "node": ">=24.16.0 <25",
+    "npm": ">=11.13.0 <12"
+  },
+  "packageManager": "npm@11.13.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -32,18 +37,18 @@
   },
   "homepage": "https://github.com/carthagedesumit-png/tech-portfolio-website#readme",
   "dependencies": {
-    "next": "^16.2.7",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "next": "^16.2.12",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.62.0",
-    "@tailwindcss/postcss": "^4.3.0",
-    "autoprefixer": "^10.5.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "autoprefixer": "^10.5.4",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^16.2.7",
-    "postcss": "^8.5.15",
-    "tailwindcss": "^4.3.0"
+    "eslint-config-next": "^16.2.12",
+    "postcss": "^8.5.23",
+    "tailwindcss": "^4.3.3"
   }
 }
