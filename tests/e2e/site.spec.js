@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+test.setTimeout(60_000);
+
 const publicRoutes = [
   ['home', '/', /Engineering the future of African businesses/i],
   ['about', '/about', /Building Technology for the Future of Business/i],
@@ -11,6 +13,46 @@ const publicRoutes = [
   ['documentation', '/docs', /Documentation Center/i],
   ['pricing', '/pricing', /Choose a CBOS path/i],
   ['licensing', '/licensing', /Licensing designed for dependable local business operations/i],
+  ['privacy', '/privacy', /Privacy Policy/i],
+  ['terms', '/terms', /Terms of Use/i],
+];
+
+const seoRoutes = [
+  '/',
+  '/about',
+  '/contact',
+  '/products/cbos',
+  '/solutions',
+  '/solutions/retail',
+  '/solutions/wholesale-distribution',
+  '/solutions/pharmacy',
+  '/solutions/hospitality',
+  '/solutions/professional-services',
+  '/solutions/multi-branch',
+  '/engineering',
+  '/engineering/solar',
+  '/engineering/networking',
+  '/engineering/security',
+  '/engineering/automation',
+  '/engineering/electrical',
+  '/engineering/consulting',
+  '/docs',
+  '/docs/cbos',
+  '/docs/getting-started',
+  '/docs/installation',
+  '/docs/user-guide',
+  '/docs/administration',
+  '/docs/backup-recovery',
+  '/docs/licensing',
+  '/docs/api',
+  '/docs/releases',
+  '/docs/troubleshooting',
+  '/docs/engineering',
+  '/pricing',
+  '/pricing/cbos',
+  '/licensing',
+  '/privacy',
+  '/terms',
 ];
 
 const viewports = [
@@ -167,6 +209,98 @@ for (const [name, path] of publicRoutes) {
     expect(blockingViolations).toEqual([]);
   });
 }
+
+test('every public route has complete and unique SEO metadata', async ({ page }) => {
+  const titles = new Set();
+  const descriptions = new Set();
+
+  for (const path of seoRoutes) {
+    const response = await page.goto(path);
+    expect(response?.ok(), path).toBe(true);
+
+    const metadata = await page.evaluate(() => ({
+      title: document.title,
+      descriptions: [...document.querySelectorAll('meta[name="description"]')].map(
+        (element) => element.content,
+      ),
+      canonicals: [...document.querySelectorAll('link[rel="canonical"]')].map(
+        (element) => element.href,
+      ),
+      ogTitles: [...document.querySelectorAll('meta[property="og:title"]')].map(
+        (element) => element.content,
+      ),
+      ogDescriptions: [
+        ...document.querySelectorAll('meta[property="og:description"]'),
+      ].map((element) => element.content),
+      twitterTitles: [...document.querySelectorAll('meta[name="twitter:title"]')].map(
+        (element) => element.content,
+      ),
+      twitterDescriptions: [
+        ...document.querySelectorAll('meta[name="twitter:description"]'),
+      ].map((element) => element.content),
+    }));
+
+    expect(metadata.title, path).toMatch(/\S/);
+    expect(metadata.descriptions, path).toHaveLength(1);
+    expect(metadata.canonicals, path).toEqual([
+      `https://carthagetechnologies.com${path === '/' ? '/' : path}`,
+    ]);
+    expect(metadata.ogTitles, path).toEqual([metadata.title]);
+    expect(metadata.ogDescriptions, path).toEqual(metadata.descriptions);
+    expect(metadata.twitterTitles, path).toEqual([metadata.title]);
+    expect(metadata.twitterDescriptions, path).toEqual(metadata.descriptions);
+    expect(titles.has(metadata.title), `duplicate title on ${path}`).toBe(false);
+    expect(
+      descriptions.has(metadata.descriptions[0]),
+      `duplicate description on ${path}`,
+    ).toBe(false);
+    titles.add(metadata.title);
+    descriptions.add(metadata.descriptions[0]);
+  }
+});
+
+test('robots and sitemap expose the intended public crawl surface', async ({ request }) => {
+  const robotsResponse = await request.get('/robots.txt');
+  expect(robotsResponse.ok()).toBe(true);
+  const robots = await robotsResponse.text();
+  expect(robots).toContain('Allow: /');
+  expect(robots).toContain('Disallow: /_next/');
+  expect(robots).toContain(
+    'Sitemap: https://carthagetechnologies.com/sitemap.xml',
+  );
+
+  const sitemapResponse = await request.get('/sitemap.xml');
+  expect(sitemapResponse.ok()).toBe(true);
+  const sitemap = await sitemapResponse.text();
+  for (const path of seoRoutes) {
+    expect(sitemap).toContain(
+      `<loc>https://carthagetechnologies.com${path === '/' ? '/' : path}</loc>`,
+    );
+  }
+});
+
+test('the 404 page provides clear recovery actions and is not indexed', async ({ page }) => {
+  const response = await page.goto('/this-page-does-not-exist');
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    /This page could not be found/i,
+  );
+  await expect(page.getByRole('link', { name: 'Return home' })).toHaveAttribute(
+    'href',
+    '/',
+  );
+  await expect(
+    page.getByRole('link', { name: 'Browse documentation' }),
+  ).toHaveAttribute('href', '/docs');
+  await expect(page.getByRole('link', { name: 'Contact our team' })).toHaveAttribute(
+    'href',
+    '/contact',
+  );
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    'content',
+    'noindex',
+  );
+});
 
 test('desktop primary navigation is visible and keyboard reachable at 1440px', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });

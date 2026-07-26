@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import CorporateHeader from '@/components/layout/CorporateHeader';
 import CorporateFooter from '@/components/layout/CorporateFooter';
 import HeroSection from '@/components/home/HeroSection';
@@ -12,17 +11,6 @@ import CorporateCTA from '@/components/home/CorporateCTA';
 export default function HomePage() {
   return (
     <>
-      <Head>
-        <title>Carthage Technologies | Business Software and Intelligent Infrastructure</title>
-        <meta name="description" content="Carthage Technologies builds business software, automation, renewable energy systems, and intelligent infrastructure for modern organizations." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Carthage Technologies" />
-        <meta property="og:description" content="Business software, automation, renewable energy systems, and intelligent infrastructure for modern organizations." />
-        <meta property="og:type" content="website" />
-        <meta name="theme-color" content="#020617" />
-        <link rel="icon" href="/icons/favicon.svg" />
-      </Head>
-
       <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-300/30 selection:text-white">
         <CorporateHeader />
         <main>

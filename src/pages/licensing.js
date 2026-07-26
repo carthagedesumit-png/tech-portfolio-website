@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import CorporateHeader from '../components/layout/CorporateHeader';
 import CorporateFooter from '../components/layout/CorporateFooter';
 import PricingCTA from '../components/pricing/shared/PricingCTA';
@@ -44,19 +43,6 @@ const lifecycleStates = [
 export default function LicensingPage() {
   return (
     <>
-      <Head>
-        <title>CBOS Licensing | Carthage Technologies</title>
-        <meta
-          name="description"
-          content="Learn about CBOS activation, offline licensing, edition policies, lifecycle states, and future commercial licensing models."
-        />
-        <meta property="og:title" content="CBOS Licensing" />
-        <meta
-          property="og:description"
-          content="Understand the CBOS licensing foundation, edition model, and commercial planning approach."
-        />
-      </Head>
-
       <div className="min-h-screen bg-slate-950 text-slate-100">
         <CorporateHeader />
 

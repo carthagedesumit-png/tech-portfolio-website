@@ -1,9 +1,9 @@
 const footerGroups = [
-  ['Company', [['About', '/about'], ['Contact', '/contact'], 'Roadmap']],
-  ['Products', ['CBOS', 'Modules', 'Editions planned']],
+  ['Company', [['About', '/about'], ['Contact', '/contact'], ['Roadmap', '/docs/releases']]],
+  ['Products', [['CBOS', '/products/cbos'], ['Modules', '/products/cbos#capabilities'], ['Editions', '/pricing']]],
   ['Engineering', [['Solar systems', '/engineering/solar'], ['Networking', '/engineering/networking'], ['Security', '/engineering/security'], ['Automation', '/engineering/automation']]],
-  ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], 'GitHub']],
-  ['Legal', ['Privacy placeholder', 'Terms placeholder']],
+  ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], ['GitHub', 'https://github.com/carthagedesumit-png/tech-portfolio-website']]],
+  ['Legal', [['Privacy Policy', '/privacy'], ['Terms of Use', '/terms']]],
 ];
 
 export default function CorporateFooter() {
@@ -20,7 +20,9 @@ export default function CorporateFooter() {
               <p className="text-sm font-bold text-white">{title}</p>
               <ul className="mt-3 space-y-2 text-sm text-slate-500">
                 {links.map((link) => (
-                  <li key={Array.isArray(link) ? link[0] : link}>{Array.isArray(link) ? <a className="hover:text-cyan-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300" href={link[1]}>{link[0]}</a> : link === 'GitHub' ? <a className="hover:text-cyan-200" href="https://github.com/carthagedesumit-png/tech-portfolio-website">GitHub</a> : link}</li>
+                  <li key={link[0]}>
+                    <a className="rounded-sm hover:text-cyan-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300" href={link[1]}>{link[0]}</a>
+                  </li>
                 ))}
               </ul>
             </div>
