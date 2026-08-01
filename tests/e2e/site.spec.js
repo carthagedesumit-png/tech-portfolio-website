@@ -17,6 +17,7 @@ const publicRoutes = [
   ['licensing', '/licensing', /Licensing designed for dependable local business operations/i],
   ['privacy', '/privacy', /Privacy Policy/i],
   ['terms', '/terms', /Terms of Use/i],
+  ['PowerOps research', '/research/powerops', /PowerOps Digital Field Survey/i],
 ];
 
 const seoRoutes = [
@@ -327,6 +328,135 @@ test('desktop primary navigation is visible and keyboard reachable at 1440px', a
   await page.getByRole('link', { name: 'Carthage Technologies home' }).focus();
   await page.keyboard.press('Tab');
   await expect(homeLink).toBeFocused();
+});
+
+test('PowerOps generates an Interview ID, autosaves, and restores the active draft', async ({ page }) => {
+  await page.goto('/research/powerops');
+  const interviewId = await page.getByTestId('interview-id').textContent();
+  expect(interviewId).toMatch(/^PO-\d{8}-[A-F0-9]{6}$/);
+
+  await page.getByLabel('Interviewer name or code *').fill('FIELD-07');
+  await page.getByLabel('General location *').fill('Kano Central');
+  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('carthage.powerops.survey.v1')).active.location)).toBe('Kano Central');
+  await page.reload();
+
+  await expect(page.getByTestId('interview-id')).toHaveText(interviewId);
+  await expect(page.getByLabel('Interviewer name or code *')).toHaveValue('FIELD-07');
+  await expect(page.getByLabel('General location *')).toHaveValue('Kano Central');
+});
+
+test('PowerOps preserves an unfinished draft and Interview ID when a new interview is cancelled', async ({ page }) => {
+  await page.goto('/research/powerops');
+  const interviewId = await page.getByTestId('interview-id').textContent();
+  await page.getByLabel('General location *').fill('Draft location');
+
+  page.once('dialog', async (dialog) => {
+    expect(dialog.message()).toContain('discard this unfinished draft');
+    await dialog.dismiss();
+  });
+  await page.getByRole('button', { name: 'New interview' }).click();
+
+  await expect(page.getByTestId('interview-id')).toHaveText(interviewId);
+  await expect(page.getByLabel('General location *')).toHaveValue('Draft location');
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('carthage.powerops.survey.v1')));
+  expect(stored.active.interviewId).toBe(interviewId);
+  expect(stored.active.location).toBe('Draft location');
+});
+
+test('PowerOps creates a new Interview ID after unfinished-draft confirmation', async ({ page }) => {
+  await page.goto('/research/powerops');
+  const interviewId = await page.getByTestId('interview-id').textContent();
+  await page.getByLabel('Most recent disruptive outage *').fill('Meaningful outage evidence');
+
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'New interview' }).click();
+
+  await expect(page.getByTestId('interview-id')).not.toHaveText(interviewId);
+  await expect(page.getByLabel('Most recent disruptive outage *')).toHaveValue('');
+});
+
+test('PowerOps blocks incomplete completion and synchronously persists a valid response', async ({ page }) => {
+  await page.goto('/research/powerops');
+  await page.getByRole('button', { name: 'Complete and save locally' }).click();
+  await expect(page.getByText('Completion blocked. Add:')).toBeVisible();
+
+  await page.getByLabel('Interviewer name or code *').fill('FIELD-11');
+  await page.getByLabel('Business category *').selectOption('Pharmacy');
+  await page.getByLabel('General location *').fill('Kaduna North');
+  await page.getByLabel('Most recent disruptive outage *').fill('Freezer stopped for four hours and stock warmed.');
+  await page.getByLabel('Participation and note-taking consent *').check();
+  await page.getByRole('button', { name: 'Complete and save locally' }).click();
+
+  await expect(page.getByText('Interview completed and saved locally. Export completed responses promptly.')).toBeVisible();
+  await expect(page.getByTestId('completed-count')).toHaveText('1');
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('carthage.powerops.survey.v1')));
+  expect(stored.active).toBeNull();
+  expect(stored.completed).toHaveLength(1);
+  expect(stored.completed[0].status).toBe('Complete');
+  expect(stored.completed[0].recentOutage).toContain('four hours');
+});
+
+test('PowerOps requires and focuses the Other business category description', async ({ page }) => {
+  await page.goto('/research/powerops');
+  await page.getByLabel('Interviewer name or code *').fill('FIELD-12');
+  await page.getByLabel('Business category *').selectOption('Other');
+  await page.getByLabel('General location *').fill('Jos Central');
+  await page.getByLabel('Most recent disruptive outage *').fill('Sales stopped during a long outage.');
+  await page.getByLabel('Participation and note-taking consent *').check();
+  await page.getByRole('button', { name: 'Complete and save locally' }).click();
+
+  await expect(page.getByText('Completion blocked. Add:')).toContainText('other business category description');
+  await expect(page.getByLabel('Other business category *')).toBeFocused();
+  await expect(page.getByTestId('completed-count')).toHaveText('0');
+
+  await page.getByLabel('Other business category *').fill('Tailoring workshop');
+  await page.getByRole('button', { name: 'Complete and save locally' }).click();
+  await expect(page.getByText('Interview completed and saved locally. Export completed responses promptly.')).toBeVisible();
+  await expect(page.getByTestId('completed-count')).toHaveText('1');
+});
+
+test('PowerOps neutralizes formula-like CSV values without changing the JSON backup', async ({ page }) => {
+  await page.goto('/research/powerops');
+  await expect(page.getByTestId('interview-id')).toHaveText(/^PO-/);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('carthage.powerops.survey.v1'))).not.toBeNull();
+  await page.evaluate(() => {
+    const stored = JSON.parse(localStorage.getItem('carthage.powerops.survey.v1'));
+    stored.completed = [{
+      ...stored.active,
+      status: 'Complete',
+      businessProfile: '   =SUM(1,2)',
+      recentOutage: '+cmd|test',
+      strongestEvidence: '-10+20',
+      mainObjection: '@IMPORTXML("https://example.test")',
+      nextAction: 'He said "follow up"',
+      completedAt: new Date().toISOString(),
+    }];
+    stored.active = null;
+    localStorage.setItem('carthage.powerops.survey.v1', JSON.stringify(stored));
+  });
+  await page.reload();
+
+  const csvDownload = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export completed interviews as CSV' }).click();
+  const csv = await (await csvDownload).createReadStream().then(async (stream) => {
+    let result = '';
+    for await (const chunk of stream) result += chunk.toString();
+    return result;
+  });
+  expect(csv).toContain('"\'   =SUM(1,2)"');
+  expect(csv).toContain('"\'+cmd|test"');
+  expect(csv).toContain('"\'-10+20"');
+  expect(csv).toContain('"\'@IMPORTXML(""https://example.test"")"');
+  expect(csv).toContain('"He said ""follow up"""');
+
+  const jsonDownload = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export JSON backup' }).click();
+  const json = await (await jsonDownload).createReadStream().then(async (stream) => {
+    let result = '';
+    for await (const chunk of stream) result += chunk.toString();
+    return result;
+  });
+  expect(JSON.parse(json).completed[0].businessProfile).toBe('   =SUM(1,2)');
 });
 
 for (const width of [375, 768]) {

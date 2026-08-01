@@ -70,6 +70,12 @@ const staticMetadata = {
     description:
       'Read how Carthage Technologies handles website enquiries, analytics, cookies, third-party services, retention, security, and privacy rights.',
   },
+  '/research/powerops': {
+    title: 'PowerOps Digital Field Survey | Carthage Technologies',
+    description:
+      'A browser-local field survey for Carthage PowerOps outage and energy-service discovery research.',
+    robots: 'noindex, nofollow',
+  },
   '/terms': {
     title: 'Terms of Use | Carthage Technologies',
     description:
@@ -158,7 +164,7 @@ export default function SiteMetadata() {
         name="twitter:description"
         content={metadata.description}
       />
-      {metadataPath === '/404' && <meta key="site-robots" name="robots" content="noindex" />}
+      {(metadataPath === '/404' || metadata.robots) && <meta key="site-robots" name="robots" content={metadata.robots || 'noindex'} />}
     </Head>
   );
 }
