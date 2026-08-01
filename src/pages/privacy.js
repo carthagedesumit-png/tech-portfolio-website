@@ -53,6 +53,18 @@ export default function PrivacyPage() {
         </p>
       </LegalSection>
 
+      <LegalSection title="PowerOps field-survey storage">
+        <p>
+          The PowerOps research survey stores active drafts and completed interviews only in
+          the browser&apos;s local storage on the device being used. There is currently no central
+          server submission. Authorized field researchers can export completed responses as
+          CSV or create a JSON backup, and can use the guarded device-data control to delete
+          the active draft and all completed interviews from that browser. Browser storage may
+          be cleared, damaged, or lost with the device, so completed responses should be
+          exported promptly and handled according to the research team&apos;s data procedures.
+        </p>
+      </LegalSection>
+
       <LegalSection title="Third-party services">
         <p>
           Website hosting, internet delivery, email providers, and linked external services

@@ -2,7 +2,7 @@ const footerGroups = [
   ['Company', [['About', '/about'], ['Portfolio', '/portfolio'], ['Contact', '/contact'], ['Roadmap', '/docs/releases']]],
   ['Products', [['CBOS', '/products/cbos'], ['Modules', '/products/cbos#capabilities'], ['Editions', '/pricing']]],
   ['Engineering', [['Solar systems', '/engineering/solar'], ['Networking', '/engineering/networking'], ['Security', '/engineering/security'], ['Automation', '/engineering/automation']]],
-  ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], ['GitHub', 'https://github.com/carthagedesumit-png/tech-portfolio-website']]],
+  ['Resources', [['Documentation', '/docs'], ['Getting started', '/docs/getting-started'], ['Troubleshooting', '/docs/troubleshooting'], ['PowerOps research', '/research/powerops'], ['GitHub', 'https://github.com/carthagedesumit-png/tech-portfolio-website']]],
   ['Legal', [['Privacy Policy', '/privacy'], ['Terms of Use', '/terms']]],
 ];
 
