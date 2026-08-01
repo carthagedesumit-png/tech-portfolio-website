@@ -94,6 +94,10 @@ npm run build
 npm run test:e2e
 ```
 
+Pull requests targeting `main` and pushes to `main` automatically run the same
+quality gate in GitHub Actions. A pull request should not be merged until the
+`Website CI / verify` check passes.
+
 After changing dependencies, refresh the lockfile with the repository's npm
 version, then run:
 
